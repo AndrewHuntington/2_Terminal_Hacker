@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Hacker : MonoBehaviour
 {
+    string greeting = "Hello, Andy.";
+
     // Start is called before the first frame update
     void Start()
     {
-        ShowMainMenu();
+        ShowMainMenu(greeting);
     }
 
-    void ShowMainMenu()
+    void ShowMainMenu(string greeting)
     {
-        var greeting = "Hello Andy";
-
         Terminal.ClearScreen();
         Terminal.WriteLine(greeting + "\nWhat would you like to hack into today?\n" +
                     "1) The local high school\n" +
@@ -22,9 +22,8 @@ public class Hacker : MonoBehaviour
                     "\nPlease enter your selection number: ");
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnUserInput(string input)
     {
-        
+        print("The user typed " + input);
     }
 }
