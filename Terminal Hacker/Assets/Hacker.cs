@@ -4,6 +4,7 @@ public class Hacker : MonoBehaviour
 {
     // variables declared outside of functions are Member Variables
     // Game configureation data
+    const string menuHint = "Type 'menu' to exit.";
     string[] level1Passwords = { "gym", "class", "book", "student", "teacher" };
     string[] level2Passwords = { "account", "withdraw", "finance", "transfer", "interest" };
     string[] level3Passwords = { "mutually", "assured", "destruction", "America", "Canada" };
@@ -63,7 +64,8 @@ public class Hacker : MonoBehaviour
         }
         else
         {
-            Terminal.WriteLine("Password invalid. Please try again.");
+            Terminal.WriteLine("Try again. Hint: " + password.Anagram());
+            Terminal.WriteLine(menuHint);
         }
     }
 
@@ -72,6 +74,7 @@ public class Hacker : MonoBehaviour
         currentScreen = Screen.Win;
         Terminal.ClearScreen();
         ShowLevelReward();
+        Terminal.WriteLine(menuHint);
     }
 
     void ShowLevelReward()
@@ -99,12 +102,11 @@ public class Hacker : MonoBehaviour
 |#*  ******  | /v\ |    O N E    *#|
 |#(1)         \===/            (1)#|
 |##=========ONE DOLLAR===========##|
-------------------------------------
 ");
                 break;
             case 3:
-                Terminal.WriteLine(@"
-          _ ._  _ , _ ._
+                Terminal.WriteLine(
+@"          _ ._  _ , _ ._
         (_ ' ( `  )_  .__)
       ( (  (    )   `)  ) _)
      (__ (_   (_ . _) _) ,__)
@@ -118,7 +120,6 @@ _____________/_ __ \_____________
                 Debug.LogError("Invalid level number.");
                 break;
         }
-        
     }
 
     void RunMainMenu(string input)
@@ -136,6 +137,7 @@ _____________/_ __ \_____________
         else
         {
             Terminal.WriteLine("Please enter a valid selection: ");
+            Terminal.WriteLine(menuHint);
         }
     }
 
@@ -143,22 +145,27 @@ _____________/_ __ \_____________
     {
         currentScreen = Screen.Password;
         Terminal.ClearScreen();
+        SetRandomPassword();
+    }
+
+    private void SetRandomPassword()
+    {
         switch (level)
         {
             case 1:
                 password = level1Passwords[Random.Range(0, level1Passwords.Length)];
                 Terminal.WriteLine("Welcome to the LAHS network.\n" +
-                    "Please enter the security password: ");
+                    "Enter your password, hint: " + password.Anagram());
                 break;
             case 2:
                 password = level2Passwords[Random.Range(0, level2Passwords.Length)];
                 Terminal.WriteLine("Welcome to the CitiBank network.\n" +
-                    "Please enter the security password: ");
+                    "Enter your password, hint: " + password.Anagram());
                 break;
             case 3:
                 password = level3Passwords[Random.Range(0, level3Passwords.Length)];
                 Terminal.WriteLine("Welcome to NORAD.\n" +
-                    "Please enter the security password: ");
+                    "Enter your password, hint: " + password.Anagram());
                 break;
             default:
                 Debug.LogError("Invalid level number");
